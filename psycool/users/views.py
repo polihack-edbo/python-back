@@ -14,6 +14,7 @@ from .serializers import (
 class CreateUserView(generics.CreateAPIView):
     """Creates a new user in the system"""
     serializer_class = UserSerializer
+    permission_classes = (permissions.AllowAny,)
 
 
 class CreateTokenView(ObtainAuthToken):
@@ -33,7 +34,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
 class PatientList(generics.ListCreateAPIView):
     """List all patients, and can GET them or POST one"""
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
 
@@ -41,7 +42,7 @@ class PatientList(generics.ListCreateAPIView):
 class PatientDetail(generics.RetrieveUpdateDestroyAPIView):
     """Gets the detail of a single patient and can GET, PUT or DELETE it"""
     permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
+        permissions.IsAuthenticated, IsOwnerOrReadOnly
     )
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
@@ -49,7 +50,7 @@ class PatientDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class PsychologistList(generics.ListCreateAPIView):
     """List all psychologists, and can GET them or POST one"""
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Psychologist.objects.all()
     serializer_class = PsychologistSerializer
 
@@ -57,7 +58,7 @@ class PsychologistList(generics.ListCreateAPIView):
 class PsychologistDetail(generics.RetrieveUpdateDestroyAPIView):
     """Gets the detail of a single psychologist and GET, PUT or DELETE it"""
     permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
+        permissions.IsAuthenticated, IsOwnerOrReadOnly
     )
     queryset = Psychologist.objects.all()
     serializer_class = PsychologistSerializer

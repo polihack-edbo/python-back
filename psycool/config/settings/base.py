@@ -3,6 +3,8 @@
 import datetime
 import os
 
+import django_heroku
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 DEBUG = True
@@ -144,3 +146,5 @@ REST_FRAMEWORK = {
 # CORS
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+django_heroku.settings(locals())

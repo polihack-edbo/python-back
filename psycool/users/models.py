@@ -31,4 +31,5 @@ class Psychologist(Profile):
     """Psychologist model that extends from Profile abstract class"""
     professional_license = models.ImageField(upload_to='licenses')
     school = models.CharField(max_length=50)
+    verified = models.BooleanField(blank=True, default=False)
 

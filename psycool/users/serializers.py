@@ -59,10 +59,7 @@ class PatientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Patient
-        fields = (
-            'birthday', 'region', 'description', 'contact',
-            'relative_contact', 'occupation', 'educational_level'
-        )
+        exclude = ('user',)
 
     def create(self, validated_data):
         """Creates a new patient instance"""
@@ -75,10 +72,7 @@ class PsychologistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Psychologist
-        fields = (
-            'birthday', 'region', 'description', 
-            'professional_license', 'school'
-        )
+        exclude = ('user',)
 
     def create(self, validated_data):
         """Creates a new psychologist instance"""

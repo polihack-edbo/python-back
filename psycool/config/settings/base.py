@@ -1,18 +1,15 @@
-"""Django settings for psycool project."""
+"""Django base settings for psycool project."""
 
 import datetime
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'j^1(0g^97zn5ocjd*-)n=$!h1xh9rztzb5adi+-nccnp%bx4i('
-
 DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
 ]
-
 
 # Application definition
 
@@ -46,10 +43,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'core.middleware.CorsMiddleware'
+    'core.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+    
 
-ROOT_URLCONF = 'psycool.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'psycool.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
@@ -113,12 +112,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATIC_URL = '/static/'
 
-# Media
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 
 # Authentication
 
